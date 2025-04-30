@@ -45,6 +45,49 @@ class MovieManager():
     def GetMovieByID(imdbID):
         movies = db.session.query(Movie).filter(Movie.imdb_id == imdbID).all()
         if movies == None:
-            movie_data = GetPieceByTitle(imdbID)
+            movie_data = GetPieceByID(imdbID)
             MovieManager.CreateMovie(movie_data)
         return movie_data
+
+
+class SerieManager():
+    def CreateSerie(data):
+        new_serie = Serie(
+            title = data["title"],
+            year = data["year"],
+            rated = data["rated"],
+            released = data["released"],
+            runtime = data["runtime"],
+            genre = data["genre"],
+            writer = data["writer"],
+            actors = data["actors"],
+            plot = data["plot"],
+            language = data["language"],
+            country = data["country"],
+            awards = data["awards"],
+            poster = data["poster"],
+            metascore = data["metascore"],
+            imdb_rating = data["imdb_rating"],
+            imdb_votes = data["imdb_votes"],
+            imdb_id = data["imdb_id"],
+            response = data["response"],
+            director = data["director"],
+            total_seasons = data["total_seasons"]
+        )
+        db.session.add(new_serie)
+        db.session.commit()
+        return {"Message":"Serie"}
+
+    def GetMovieByTitle(title):
+        Series = db.session.query(Serie).filter(Serie.title == title).all()
+        if Series == None:
+            serie_data = GetPieceByTitle(title)
+            SerieManager.CreateSerie(serie_data)
+        return serie_data
+    
+    def GetMovieByID(imdbID):
+        Series = db.session.query(Serie).filter(Serie.imdb_id == imdbID).all()
+        if Series == None:
+            serie_data = GetPieceByID(imdbID)
+            SerieManager.CreateSerie(serie_data)
+        return serie_data
