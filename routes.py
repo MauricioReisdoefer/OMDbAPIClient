@@ -1,8 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from models import Piece
+from models import Piece, db
 from service import GetPieceByTitle, GetPieceByID
-
-db = SQLAlchemy()
 
 class PieceManager():
     def CreateMovie(data):
