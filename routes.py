@@ -1,12 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
-from models import Movie, Serie
+from models import Piece
 from service import GetPieceByTitle, GetPieceByID
 
 db = SQLAlchemy()
 
-class MovieManager():
+class PieceManager():
     def CreateMovie(data):
-        new_movie = Movie(
+        new_movie = Piece(
             title = data["title"],
             year = data["year"],
             rated = data["rated"],
@@ -26,68 +26,21 @@ class MovieManager():
             imdb_id = data["imdb_id"],
             response = data["response"],
             director = data["director"],
-            dvd = data["dvd"],
-            box_office = data["box_office"],
-            production = data["production"],
-            website = data["website"]
         )
         db.session.add(new_movie)
         db.session.commit()
         return {"Message":"Movie Added"}
 
-    def GetMovieByTitle(title):
-        movies = db.session.query(Movie).filter(Movie.title == title).all()
+    def GetPieceByTitle(title):
+        movies = db.session.query(Piece).filter(Piece.title == title).all()
         if movies == None:
             movie_data = GetPieceByTitle(title)
-            MovieManager.CreateMovie(movie_data)
+            PieceManager.CreateMovie(movie_data)
         return movie_data
     
-    def GetMovieByID(imdbID):
-        movies = db.session.query(Movie).filter(Movie.imdb_id == imdbID).all()
+    def GetPieceByID(imdbID):
+        movies = db.session.query(Piece).filter(Piece.imdb_id == imdbID).all()
         if movies == None:
             movie_data = GetPieceByID(imdbID)
-            MovieManager.CreateMovie(movie_data)
+            PieceManager.CreateMovie(movie_data)
         return movie_data
-
-
-class SerieManager():
-    def CreateSerie(data):
-        new_serie = Serie(
-            title = data["title"],
-            year = data["year"],
-            rated = data["rated"],
-            released = data["released"],
-            runtime = data["runtime"],
-            genre = data["genre"],
-            writer = data["writer"],
-            actors = data["actors"],
-            plot = data["plot"],
-            language = data["language"],
-            country = data["country"],
-            awards = data["awards"],
-            poster = data["poster"],
-            metascore = data["metascore"],
-            imdb_rating = data["imdb_rating"],
-            imdb_votes = data["imdb_votes"],
-            imdb_id = data["imdb_id"],
-            response = data["response"],
-            director = data["director"],
-            total_seasons = data["total_seasons"]
-        )
-        db.session.add(new_serie)
-        db.session.commit()
-        return {"Message":"Serie"}
-
-    def GetMovieByTitle(title):
-        Series = db.session.query(Serie).filter(Serie.title == title).all()
-        if Series == None:
-            serie_data = GetPieceByTitle(title)
-            SerieManager.CreateSerie(serie_data)
-        return serie_data
-    
-    def GetMovieByID(imdbID):
-        Series = db.session.query(Serie).filter(Serie.imdb_id == imdbID).all()
-        if Series == None:
-            serie_data = GetPieceByID(imdbID)
-            SerieManager.CreateSerie(serie_data)
-        return serie_data

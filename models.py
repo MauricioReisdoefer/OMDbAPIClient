@@ -24,12 +24,3 @@ class Piece(db.Model):
     type = db.Column(db.String(10), nullable=True)
     response = db.Column(db.String(10), nullable=True)
     director = db.Column(db.String(100), nullable=True)
-
-class Movie(Piece):
-    dvd = db.Column(db.String(20), nullable=True)
-    box_office = db.Column(db.String(30), nullable=True)
-    production = db.Column(db.String(100), nullable=True)
-    website = db.Column(db.String(100), nullable=True)
-
-class Serie(Piece):
-    total_seasons = db.Column(db.Integer, nullable=True)
