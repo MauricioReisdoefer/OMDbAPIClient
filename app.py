@@ -29,3 +29,14 @@ def initiate():
 @app.route("/")
 def index():
     return {"Message": "Ok"}, 200
+
+@app.route("/title_search/<title>")
+def search_by_title(title):
+    return PieceManager.GetPieceByTitle(title)
+
+@app.route("/id_search/<id>")
+def search_by_title(title):
+    return PieceManager.GetPieceByID(id)
+
+if __name__ == "__main__":
+    app.run()

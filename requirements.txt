@@ -1,3 +1,5 @@
 flask
 flask_sqlalchemy
 dotenv
+psycopg2
+psycopg2-binary>=2.9
