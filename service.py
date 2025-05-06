@@ -19,7 +19,7 @@ def GetPieceByID(imdb_id) -> dict:
 def GetPieceByTitle(title) -> dict:
     params = {
         'apikey': API_KEY,
-        's': title
+        't': title
     }
     response = requests.get(BASE_URL, params=params)
     data = response.json()
@@ -27,4 +27,4 @@ def GetPieceByTitle(title) -> dict:
     if data.get('Response') == 'False':
         return {'error': 'Not Found'}
 
-    return data
+    return data
