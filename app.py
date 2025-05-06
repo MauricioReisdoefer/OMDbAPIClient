@@ -35,7 +35,7 @@ def search_by_title(title):
     return PieceManager.GetPieceByTitle(title)
 
 @app.route("/id_search/<id>")
-def search_by_title(title):
+def search_by_id(id):
     return PieceManager.GetPieceByID(id)
 
 if __name__ == "__main__":

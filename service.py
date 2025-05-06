@@ -1,10 +1,30 @@
-def GetPieceByID(id) -> dict:
-    # Vai encontrar o filme pelo ID DO IMDB e retornar no formato JSON
-    # Caso não encontrado, retornar erro "Not Found"
-    pass 
+import requests
+
+API_KEY = '33027bcd'  # Coloque aqui sua chave da OMDb API
+BASE_URL = 'http://www.omdbapi.com/'
+
+def GetPieceByID(imdb_id) -> dict:
+    params = {
+        'apikey': API_KEY,
+        'i': imdb_id
+    }
+    response = requests.get(BASE_URL, params=params)
+    data = response.json()
+    
+    if data.get('Response') == 'False':
+        return {'error': 'Not Found'}
+    
+    return data
 
 def GetPieceByTitle(title) -> dict:
-    # Vai encontrar o filme pelo TITLE e retornar no formato JSON
-    # Caso não encontrado, retornar erro "Not Found"
-    # Se for possível, tu fazer algum tipo de corretor, mas isso é meio complicado
-    pass 
+    params = {
+        'apikey': API_KEY,
+        's': title
+    }
+    response = requests.get(BASE_URL, params=params)
+    data = response.json()
+
+    if data.get('Response') == 'False':
+        return {'error': 'Not Found'}
+
+    return data
